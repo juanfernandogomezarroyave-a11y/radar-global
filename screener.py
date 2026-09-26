@@ -722,7 +722,7 @@ def render_html(ctx) -> str:
 puede extenderse mucho más de lo que parece razonable. Úsalo para decidir qué investigar, no qué comprar.</div>
 
 {'<h2>Reportes anteriores</h2><div class="card muted">' + archivo.rstrip(' · ') + '</div>' if archivo else ''}
-<footer>Fuentes: Yahoo Finance, FRED (Reserva Federal de St. Louis). Radar Global v1.0</footer>
+<footer>Fuentes: Yahoo Finance, FRED (Reserva Federal de St. Louis). Radar Global v1.1</footer>
 </div>
 <script>
 (function(){{var b=document.getElementById('tgl'),r=document.documentElement;
