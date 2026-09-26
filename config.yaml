@@ -1,0 +1,279 @@
+# =====================================================================
+#  RADAR GLOBAL — universo y parámetros
+#  Todo lo que quieras ajustar vive aquí. El código no se toca.
+#  (Se puede editar desde el celular en github.com → archivo → lápiz.)
+#
+#  Formato de "serie":
+#    "yf:TICKER"   -> Yahoo Finance (ETFs, futuros, divisas, índices)
+#    "fred:ID"     -> FRED, Reserva Federal de St. Louis (tasas, spreads)
+#    {a: ..., op: "/" o "-", b: ...}  -> serie derivada (ratio o diferencial)
+#
+#  Tipos (cómo se mide el extremo):
+#    precio / fx  -> distancia a su tendencia de 40 semanas, estandarizada vs. 3 años
+#    tasa / spread / ratio / volatilidad -> nivel vs. sus últimos 3 años
+# =====================================================================
+
+parametros:
+  lookback_semanas: 156            # ventana de "normalidad" del activo (3 años)
+  media_tendencia_semanas: 40      # ~200 días hábiles
+  historia_larga_semanas: 520      # percentil de 10 años (contexto)
+  umbrales:                        # en desviaciones estándar |z|
+    aviso: 2.0
+    fuerte: 2.5
+    extremo: 3.0
+  horizonte_confiabilidad_semanas: 13   # ¿qué pasó 13 semanas después de extremos similares?
+  elecciones_aviso_dias: 90
+  elecciones_horizonte_dias: 400
+  max_alertas_correo: 12
+  dias_dato_viejo: 10              # series diarias sin actualizar hace más de esto = alerta de datos
+
+lecturas_por_tipo:
+  precio:
+    alta: "Muy por encima de su tendencia: estirado. Vigilar agotamiento, o confirmar si es un cambio de régimen."
+    baja: "Muy por debajo de su tendencia: castigado. Candidato a revisión de valor si el deterioro no es estructural."
+  fx:
+    alta: "Cotiza muy por encima de su tendencia."
+    baja: "Cotiza muy por debajo de su tendencia."
+  tasa:
+    alta: "Tasa en extremo alto vs. su historia: el bono está barato. Posible entrada en duración si la inflación cede."
+    baja: "Tasa en extremo bajo: el bono está caro y deja poco colchón si la inflación sorprende."
+  spread:
+    alta: "Diferencial ampliado: el mercado cobra mucho por el riesgo. Históricamente zona contraria de oportunidad, salvo que sea el inicio de una recesión."
+    baja: "Diferencial comprimido: complacencia. Riesgo asimétrico: poco por ganar, mucho por perder."
+  ratio:
+    alta: "Ratio en extremo alto vs. sus últimos 3 años."
+    baja: "Ratio en extremo bajo vs. sus últimos 3 años."
+  volatilidad:
+    alta: "Miedo extremo. Históricamente, los picos de volatilidad han precedido buenos retornos en acciones a 3–12 meses."
+    baja: "Complacencia: la protección está barata. Momento de cubrirse, no de sumar riesgo."
+
+bloques:
+
+  # -------------------------------------------------------------------
+  - id: acciones
+    nombre: "Acciones por región"
+    por_que: >
+      Las acciones son el termómetro del crecimiento esperado y del apetito por riesgo.
+      Compararlas por región muestra hacia dónde rota el capital global: cuando EE. UU.
+      está estirado y los emergentes castigados, el valor relativo suele estar fuera de EE. UU.
+      Todos son ETF listados en EE. UU.: cualquier señal es ejecutable en Schwab.
+    instrumentos:
+      - {id: SPY,  nombre: "S&P 500 (EE. UU.)", serie: "yf:SPY", tipo: precio,
+         que_cuenta: "Las 500 grandes de EE. UU. Es el ancla del riesgo global; casi todo se mide contra él."}
+      - {id: QQQ,  nombre: "Nasdaq 100", serie: "yf:QQQ", tipo: precio,
+         que_cuenta: "Tecnología y crecimiento. Muy sensible a las tasas largas: sube cuando el mercado espera recortes."}
+      - {id: IWM,  nombre: "Russell 2000 (small caps)", serie: "yf:IWM", tipo: precio,
+         que_cuenta: "Empresas pequeñas, más endeudadas y domésticas. Reaccionan fuerte al costo del crédito y al ciclo."}
+      - {id: VGK,  nombre: "Europa", serie: "yf:VGK", tipo: precio,
+         que_cuenta: "Europa desarrollada: más bancos, industria y valor; menos tecnología que EE. UU."}
+      - {id: EWQ,  nombre: "Francia", serie: "yf:EWQ", tipo: precio,
+         que_cuenta: "Bolsa francesa. Ligada a la elección presidencial de abril de 2027 y a la prima fiscal de Francia."}
+      - {id: EWJ,  nombre: "Japón", serie: "yf:EWJ", tipo: precio,
+         que_cuenta: "Japón medido en dólares: combina la bolsa local y el yen. Clave para leer el carry trade."}
+      - {id: MCHI, nombre: "China", serie: "yf:MCHI", tipo: precio,
+         que_cuenta: "China amplia. Reacciona a estímulos de Pekín y a tensiones comerciales con EE. UU."}
+      - {id: INDA, nombre: "India", serie: "yf:INDA", tipo: precio,
+         que_cuenta: "India: la historia de crecimiento estructural de la década; suele cotizar con prima de valoración."}
+      - {id: EEM,  nombre: "Emergentes (amplio)", serie: "yf:EEM", tipo: precio,
+         que_cuenta: "Canasta emergente. Se mueve inverso al dólar: un dólar débil suele ser viento de cola."}
+      - {id: EWZ,  nombre: "Brasil", serie: "yf:EWZ", tipo: precio,
+         que_cuenta: "Brasil: petróleo, minería y bancos. Muy sensible al riesgo fiscal y a las elecciones de oct-2026."}
+      - {id: EWW,  nombre: "México", serie: "yf:EWW", tipo: precio,
+         que_cuenta: "México: beneficiario del nearshoring, muy ligado a la relación comercial con EE. UU."}
+      - {id: GXG,  nombre: "Colombia", serie: "yf:GXG", tipo: precio,
+         que_cuenta: "Colombia: bancos, petróleo y utilities. Poco líquido; se mueve con el crudo y el riesgo país."}
+      - {id: ARGT, nombre: "Argentina", serie: "yf:ARGT", tipo: precio,
+         que_cuenta: "Argentina: volatilidad extrema ligada a la política económica y a las elecciones de 2027."}
+      - {id: EIS,  nombre: "Israel", serie: "yf:EIS", tipo: precio,
+         que_cuenta: "Israel: tecnología y bancos, con prima de riesgo geopolítico. Elección legislativa el 27-oct-2026."}
+
+  # -------------------------------------------------------------------
+  - id: bonos
+    nombre: "Bonos soberanos y tasas"
+    por_que: >
+      Las tasas son el precio del dinero y el denominador de toda valoración. Un 10 años alto
+      abarata los bonos pero presiona a las acciones de crecimiento. La forma de la curva anticipa
+      el ciclo, y los diferenciales entre países explican los flujos de divisas (de ahí vive el
+      carry trade). Ojo: tasa alta = bono barato; la lectura es inversa al precio.
+    instrumentos:
+      - {id: US2Y,  nombre: "Tesoro EE. UU. 2 años", serie: "fred:DGS2", tipo: tasa,
+         que_cuenta: "Lo que el mercado espera de la Fed en los próximos 2 años. El más sensible a la política monetaria."}
+      - {id: US10Y, nombre: "Tesoro EE. UU. 10 años", serie: "fred:DGS10", tipo: tasa,
+         que_cuenta: "La tasa libre de riesgo del mundo: crecimiento, inflación y prima fiscal en un solo número."}
+      - {id: CURVA, nombre: "Curva EE. UU. 10a − 2a", serie: "fred:T10Y2Y", tipo: spread,
+         que_cuenta: "Pendiente de la curva. Invertida ha anticipado recesiones; al re-empinarse suele coincidir con el inicio del daño.",
+         lectura_alta: "Curva empinada: típica de salida de recesión, o de miedo fiscal/inflacionario de largo plazo.",
+         lectura_baja: "Curva plana o invertida: el mercado espera recortes. Señal histórica de recesión a 6–24 meses."}
+      - {id: REAL10, nombre: "Tasa real EE. UU. 10a (TIPS)", serie: "fred:DFII10", tipo: tasa,
+         que_cuenta: "Tasa descontando inflación. Es el verdadero costo del dinero y el gran rival del oro.",
+         lectura_alta: "Tasa real alta: dinero caro. Presiona al oro y a los activos largos; los TIPS rinden atractivo real.",
+         lectura_baja: "Tasa real baja o negativa: favorece al oro y a los activos reales."}
+      - {id: BE10,  nombre: "Inflación esperada EE. UU. 10a", serie: "fred:T10YIE", tipo: tasa,
+         que_cuenta: "La inflación que descuenta el mercado de bonos (breakeven).",
+         lectura_alta: "El mercado descuenta inflación alta: favorece TIPS y materias primas.",
+         lectura_baja: "Expectativas de inflación bajas: bonos nominales relativamente mejor que TIPS."}
+      - {id: DE10,  nombre: "Bund Alemania 10a", serie: "fred:IRLTLT01DEM156N", tipo: tasa,
+         que_cuenta: "Referencia de la zona euro. Serie mensual de la OCDE: llega con rezago de semanas."}
+      - {id: JP10,  nombre: "JGB Japón 10a", serie: "fred:IRLTLT01JPM156N", tipo: tasa,
+         que_cuenta: "Japón normalizando tasas tras décadas en cero. Si sube, amenaza el carry trade del yen. Serie mensual."}
+      - {id: USJP,  nombre: "Diferencial EE. UU. − Japón 10a",
+         serie: {a: "fred:DGS10", op: "-", b: "fred:IRLTLT01JPM156N"}, tipo: spread,
+         que_cuenta: "El motor del carry trade: endeudarse en yenes baratos para invertir en dólares.",
+         lectura_alta: "Diferencial amplio: el carry es atractivo y probablemente está muy cargado. Frágil ante sorpresas del BoJ.",
+         lectura_baja: "Diferencial estrecho: el incentivo del carry se agota. Riesgo de desarme y yen fuerte (como en ago-2024)."}
+      - {id: FRDE,  nombre: "Prima Francia − Alemania 10a",
+         serie: {a: "fred:IRLTLT01FRM156N", op: "-", b: "fred:IRLTLT01DEM156N"}, tipo: spread,
+         que_cuenta: "Cuánto más paga Francia que Alemania. Termómetro del riesgo político-fiscal francés rumbo a 2027.",
+         lectura_alta: "Estrés fiscal o político en Francia: el mercado cobra una prima alta.",
+         lectura_baja: "Francia sin prima relevante: el mercado no descuenta riesgo político."}
+      - {id: TLT,   nombre: "Tesoros 20+ años (ETF)", serie: "yf:TLT", tipo: precio,
+         que_cuenta: "Bonos largos de EE. UU. en precio. La forma ejecutable de apostar a que las tasas bajen."}
+      - {id: EMB,   nombre: "Deuda emergente en dólares", serie: "yf:EMB", tipo: precio,
+         que_cuenta: "Soberanos emergentes en USD: riesgo país sin riesgo cambiario."}
+      - {id: EMLC,  nombre: "Deuda emergente en moneda local", serie: "yf:EMLC", tipo: precio,
+         que_cuenta: "Soberanos emergentes en su moneda: tasa local + divisa. Brilla cuando el dólar se debilita."}
+
+  # -------------------------------------------------------------------
+  - id: divisas
+    nombre: "Divisas"
+    por_que: >
+      Las monedas resumen el diferencial de tasas, la balanza comercial y el apetito por riesgo.
+      Un dólar fuerte aprieta a emergentes y materias primas; un dólar débil los impulsa.
+      Para ti hay además una lectura práctica: el USD/COP define cuándo conviene dolarizar
+      ahorro hacia Schwab. Ojo: en pares USD/XXX, "alto" significa moneda local débil.
+    instrumentos:
+      - {id: DXY,    nombre: "Índice dólar (DXY)", serie: "yf:DX-Y.NYB", tipo: fx,
+         que_cuenta: "El dólar contra una canasta de desarrolladas (57% euro).",
+         lectura_alta: "Dólar muy fuerte: presión sobre emergentes, materias primas y utilidades de multinacionales de EE. UU.",
+         lectura_baja: "Dólar débil: viento de cola para emergentes, oro y materias primas."}
+      - {id: EURUSD, nombre: "Euro / dólar", serie: "yf:EURUSD=X", tipo: fx,
+         que_cuenta: "El par más líquido del mundo: diferencial BCE vs. Fed.",
+         lectura_alta: "Euro muy fuerte frente al dólar.", lectura_baja: "Euro muy débil frente al dólar."}
+      - {id: USDJPY, nombre: "Dólar / yen", serie: "yf:JPY=X", tipo: fx,
+         que_cuenta: "Termómetro del carry trade. Alto = yen débil.",
+         lectura_alta: "Yen muy débil: carry trade cargado. Riesgo de desarme brusco si el BoJ o la Fed sorprenden.",
+         lectura_baja: "Yen fortaleciéndose con fuerza: señal de desarme del carry; suele coincidir con caídas en activos de riesgo."}
+      - {id: USDCOP, nombre: "Dólar / peso colombiano", serie: "yf:COP=X", tipo: fx,
+         que_cuenta: "Tu tasa de cambio. Alto = peso débil. Se mueve con el petróleo, el riesgo país y el dólar global.",
+         lectura_alta: "Peso muy débil (dólar caro vs. su tendencia): mal momento para comprar dólares; bueno para monetizar los que tengas.",
+         lectura_baja: "Peso muy fuerte (dólar barato vs. su tendencia): ventana para dolarizar ahorro hacia inversión en USD."}
+      - {id: USDBRL, nombre: "Dólar / real brasileño", serie: "yf:BRL=X", tipo: fx,
+         que_cuenta: "Alto = real débil. Muy sensible a la política fiscal y a las elecciones de oct-2026.",
+         lectura_alta: "Real muy débil: los activos brasileños están baratos medidos en dólares.",
+         lectura_baja: "Real muy fuerte: los activos brasileños ya se apreciaron en dólares."}
+      - {id: USDMXN, nombre: "Dólar / peso mexicano", serie: "yf:MXN=X", tipo: fx,
+         que_cuenta: "Alto = peso débil. La moneda emergente más líquida; se usa como cobertura de todo EM.",
+         lectura_alta: "Peso mexicano muy débil: estrés emergente o comercial con EE. UU.",
+         lectura_baja: "Peso mexicano muy fuerte: carry atractivo y apetito por riesgo alto."}
+      - {id: USDCNY, nombre: "Dólar / yuan", serie: "yf:CNY=X", tipo: fx,
+         que_cuenta: "Moneda administrada: los movimientos grandes son decisiones de política.",
+         lectura_alta: "Yuan débil: posible devaluación competitiva; exporta deflación al mundo.",
+         lectura_baja: "Yuan fuerte: Pekín tolera apreciación; buena señal para emergentes asiáticos."}
+      - {id: AUDUSD, nombre: "Dólar australiano / dólar", serie: "yf:AUDUSD=X", tipo: fx,
+         que_cuenta: "Proxy de la demanda china de materias primas y del apetito global por riesgo.",
+         lectura_alta: "AUD fuerte: apetito por riesgo y demanda de materias primas.",
+         lectura_baja: "AUD débil: desaceleración china o aversión al riesgo."}
+      - {id: USDILS, nombre: "Dólar / shekel", serie: "yf:ILS=X", tipo: fx,
+         que_cuenta: "Alto = shekel débil. Recoge la prima de riesgo político y geopolítico de Israel.",
+         lectura_alta: "Shekel débil: prima de riesgo israelí alta.",
+         lectura_baja: "Shekel fuerte: el mercado no cobra prima de riesgo israelí."}
+
+  # -------------------------------------------------------------------
+  - id: materias
+    nombre: "Materias primas"
+    por_que: >
+      Son la economía real: energía para producir, metales para construir, alimentos para vivir.
+      Anticipan la inflación antes que el IPC y definen los términos de intercambio de países como
+      Colombia y Brasil. Oro y plata funcionan además como moneda sin emisor.
+      Nota técnica: los futuros continuos tienen saltos en los cambios de contrato.
+    instrumentos:
+      - {id: WTI,   nombre: "Petróleo WTI", serie: "yf:CL=F", tipo: precio,
+         que_cuenta: "Crudo de referencia en EE. UU. Mueve la inflación, las cuentas fiscales de Colombia y el USD/COP."}
+      - {id: BRENT, nombre: "Petróleo Brent", serie: "yf:BZ=F", tipo: precio,
+         que_cuenta: "Referencia global y del crudo colombiano. Recoge la prima geopolítica de Medio Oriente."}
+      - {id: GAS,   nombre: "Gas natural (Henry Hub)", serie: "yf:NG=F", tipo: precio,
+         que_cuenta: "Muy estacional y volátil: clima, exportaciones de GNL y demanda eléctrica de centros de datos (IA)."}
+      - {id: ORO,   nombre: "Oro", serie: "yf:GC=F", tipo: precio,
+         que_cuenta: "Refugio y moneda sin emisor. Rival de la tasa real; hoy también lo impulsan las compras de bancos centrales."}
+      - {id: PLATA, nombre: "Plata", serie: "yf:SI=F", tipo: precio,
+         que_cuenta: "Mitad metal precioso, mitad industrial (solar, electrónica). Más volátil que el oro: amplifica sus movimientos."}
+      - {id: COBRE, nombre: "Cobre", serie: "yf:HG=F", tipo: precio,
+         que_cuenta: "\"Dr. Copper\": ciclo industrial, China y electrificación (redes, vehículos eléctricos, centros de datos)."}
+      - {id: CAFE,  nombre: "Café arábica", serie: "yf:KC=F", tipo: precio,
+         que_cuenta: "Clima en Brasil y Colombia. Pesa en las exportaciones colombianas y en el ingreso rural."}
+      - {id: TRIGO, nombre: "Trigo", serie: "yf:ZW=F", tipo: precio,
+         que_cuenta: "Alimento base global; sensible a Rusia/Ucrania y al clima. Presiona la inflación de alimentos en importadores."}
+      - {id: SOYA,  nombre: "Soya", serie: "yf:ZS=F", tipo: precio,
+         que_cuenta: "Proteína y aceite; eje del comercio EE. UU.–China–Brasil."}
+      - {id: DBA,   nombre: "Agrícola amplio (ETF)", serie: "yf:DBA", tipo: precio,
+         que_cuenta: "Canasta agrícola ejecutable (café, cacao, azúcar, granos, ganado)."}
+
+  # -------------------------------------------------------------------
+  - id: energia
+    nombre: "Energía (sector)"
+    por_que: >
+      Las empresas de energía no son lo mismo que el petróleo: descuentan el precio futuro, la
+      disciplina de capital y la transición. Uranio y renovables son apuestas distintas:
+      el uranio por la demanda eléctrica (IA, reactores nuevos) con oferta rígida; las renovables
+      se comportan casi como un bono largo disfrazado de acción, porque son proyectos financiados
+      a largo plazo: suben cuando bajan las tasas.
+    instrumentos:
+      - {id: XLE,  nombre: "Energía EE. UU. (grandes)", serie: "yf:XLE", tipo: precio,
+         que_cuenta: "Exxon, Chevron y compañía: flujo de caja, dividendos y recompras. Menos volátil que el crudo."}
+      - {id: XOP,  nombre: "Exploración y producción", serie: "yf:XOP", tipo: precio,
+         que_cuenta: "Productoras medianas: apalancamiento operativo puro al precio del crudo."}
+      - {id: URA,  nombre: "Uranio y nuclear", serie: "yf:URA", tipo: precio,
+         que_cuenta: "Mineras de uranio y servicios nucleares. Tesis de demanda eléctrica de IA con oferta rígida; muy volátil."}
+      - {id: ICLN, nombre: "Energías renovables", serie: "yf:ICLN", tipo: precio,
+         que_cuenta: "Solar, eólica y servicios limpios. Muy sensible a las tasas y a la política (subsidios, aranceles)."}
+
+  # -------------------------------------------------------------------
+  - id: credito
+    nombre: "Crédito y riesgo"
+    por_que: >
+      El mercado de crédito suele ver los problemas antes que la bolsa: cuando las empresas pagan
+      más por endeudarse, algo se está rompiendo. Los spreads y la volatilidad son el termómetro
+      del miedo. Regla práctica: spreads comprimidos + volatilidad baja = complacencia;
+      spreads disparados + VIX alto = donde históricamente han nacido las mejores entradas.
+    instrumentos:
+      - {id: HYSPR, nombre: "Spread high yield EE. UU.", serie: "fred:BAMLH0A0HYM2", tipo: spread,
+         que_cuenta: "La prima extra que pagan las empresas con peor calificación. El mejor termómetro de estrés corporativo."}
+      - {id: IGSPR, nombre: "Spread grado de inversión EE. UU.", serie: "fred:BAMLC0A0CM", tipo: spread,
+         que_cuenta: "La prima de las empresas sólidas. Si también se amplía, el estrés es sistémico, no solo de las débiles."}
+      - {id: HYG,   nombre: "Bonos high yield (ETF)", serie: "yf:HYG", tipo: precio,
+         que_cuenta: "Forma ejecutable del crédito especulativo."}
+      - {id: LQD,   nombre: "Corporativos grado de inversión (ETF)", serie: "yf:LQD", tipo: precio,
+         que_cuenta: "Crédito de calidad: mezcla riesgo de tasa y de crédito."}
+      - {id: VIX,   nombre: "VIX (volatilidad acciones)", serie: "yf:^VIX", tipo: volatilidad,
+         que_cuenta: "Volatilidad implícita del S&P 500 a 30 días: el \"índice del miedo\"."}
+      - {id: MOVE,  nombre: "MOVE (volatilidad bonos)", serie: "yf:^MOVE", tipo: volatilidad,
+         que_cuenta: "El VIX de los bonos del Tesoro. Si se dispara, el estrés viene de las tasas."}
+
+  # -------------------------------------------------------------------
+  - id: ratios
+    nombre: "Señales cruzadas (ratios)"
+    por_que: >
+      Aquí está lo que la mayoría no mira. Un activo solo te dice su precio; un ratio entre dos te
+      cuenta la historia macro: crecimiento vs. miedo, riesgo vs. refugio, EE. UU. vs. el resto.
+      Son los indicadores que usan los fondos macro para leer el régimen de mercado.
+    instrumentos:
+      - {id: CUAU,  nombre: "Cobre / Oro", serie: {a: "yf:HG=F", op: "/", b: "yf:GC=F"}, tipo: ratio,
+         que_cuenta: "Crecimiento (cobre) vs. miedo (oro). Históricamente muy correlacionado con el 10 años de EE. UU.",
+         lectura_alta: "El mercado descuenta crecimiento; suele acompañar tasas largas al alza.",
+         lectura_baja: "El mercado descuenta miedo o recesión; si el 10 años no ha bajado, puede estar rezagado."}
+      - {id: AUAG,  nombre: "Oro / Plata", serie: {a: "yf:GC=F", op: "/", b: "yf:SI=F"}, tipo: ratio,
+         que_cuenta: "Cuántas onzas de plata compra una de oro.",
+         lectura_alta: "Plata barata vs. oro: históricamente la plata recupera terreno cuando mejora el ciclo industrial.",
+         lectura_baja: "Plata cara vs. oro: el rally de metales puede estar maduro."}
+      - {id: SMLG,  nombre: "Small caps / S&P 500", serie: {a: "yf:IWM", op: "/", b: "yf:SPY"}, tipo: ratio,
+         que_cuenta: "Amplitud del mercado: ¿sube todo o solo las gigantes?",
+         lectura_alta: "Small caps liderando: apetito por riesgo amplio y expectativa de tasas más bajas.",
+         lectura_baja: "Small caps muy rezagadas: posible valor relativo si llegan recortes de tasas."}
+      - {id: EMUS,  nombre: "Emergentes / EE. UU.", serie: {a: "yf:EEM", op: "/", b: "yf:SPY"}, tipo: ratio,
+         que_cuenta: "Rotación geográfica del capital.",
+         lectura_alta: "Emergentes superando a EE. UU.: suele coincidir con dólar débil.",
+         lectura_baja: "Emergentes en extremo de rezago vs. EE. UU.: valor relativo, si aparece el catalizador (dólar débil)."}
+      - {id: OILAU, nombre: "Petróleo / Oro", serie: {a: "yf:CL=F", op: "/", b: "yf:GC=F"}, tipo: ratio,
+         que_cuenta: "Demanda real (petróleo) vs. refugio (oro).",
+         lectura_alta: "Petróleo caro vs. oro: presión inflacionaria y economía caliente.",
+         lectura_baja: "Petróleo barato vs. oro: debilidad de demanda; señal defensiva."}

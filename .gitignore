@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+data/correo_preview.html
+data/ultimo_demo.json
+.venv/

@@ -1,0 +1,46 @@
+name: Radar semanal
+
+on:
+  schedule:
+    # Domingo ~8:15 p. m. hora Colombia (UTC-5) = lunes 01:15 UTC.
+    # GitHub puede demorar la ejecución unos minutos en horas pico.
+    - cron: "15 1 * * 1"
+  workflow_dispatch: {}   # botón "Run workflow" para correrlo a mano (también desde el celular)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: radar
+  cancel-in-progress: false
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Correr el radar
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: python screener.py
+
+      - name: Publicar página e historial
+        run: |
+          git config user.name "radar-bot"
+          git config user.email "radar-bot@users.noreply.github.com"
+          git add docs data
+          git commit -m "Radar $(date -u +%F)" || { echo "Sin cambios"; exit 0; }
+          git pull --rebase
+          git push
