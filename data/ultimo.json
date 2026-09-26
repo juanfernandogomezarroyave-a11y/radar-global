@@ -4,30 +4,58 @@
     {
       "id": "US10Y",
       "nombre": "Tesoro EE. UU. 10 años",
-      "z": 3.273882953343577,
+      "z": 3.2681191537298147,
       "nivel": "extremo",
+      "nuevo": true
+    },
+    {
+      "id": "REAL10",
+      "nombre": "Tasa real EE. UU. 10a (TIPS)",
+      "z": 3.7270650368399925,
+      "nivel": "extremo",
+      "nuevo": false
+    },
+    {
+      "id": "DE10",
+      "nombre": "Bund Alemania 10a",
+      "z": 2.2950163369503884,
+      "nivel": "aviso",
       "nuevo": true
     },
     {
       "id": "HYG",
       "nombre": "Bonos high yield (ETF)",
-      "z": -2.254000238059983,
+      "z": -2.2539999066916048,
       "nivel": "aviso",
       "nuevo": true
     },
     {
       "id": "EMB",
       "nombre": "Deuda emergente en dólares",
-      "z": -2.1807715994256,
+      "z": -2.180771868840266,
       "nivel": "aviso",
       "nuevo": true
     },
     {
       "id": "LQD",
       "nombre": "Corporativos grado de inversión (ETF)",
-      "z": -2.1516891949145194,
+      "z": -2.1516891216148197,
       "nivel": "aviso",
       "nuevo": true
+    },
+    {
+      "id": "JP10",
+      "nombre": "JGB Japón 10a",
+      "z": 2.384382022255798,
+      "nivel": "aviso",
+      "nuevo": false
+    },
+    {
+      "id": "USJP",
+      "nombre": "Diferencial EE. UU. − Japón 10a",
+      "z": -2.1843847693519187,
+      "nivel": "aviso",
+      "nuevo": false
     }
   ],
   "elecciones_en_ventana": [
@@ -36,35 +64,5 @@
     "Israel 2026-10-27",
     "Estados Unidos 2026-11-03"
   ],
-  "problemas": [
-    "Sin datos: fred:BAMLC0A0CM",
-    "Sin datos: fred:BAMLH0A0HYM2",
-    "Sin datos: fred:DFII10",
-    "Sin datos: fred:DGS2",
-    "Sin datos: fred:IRLTLT01DEM156N",
-    "Sin datos: fred:IRLTLT01FRM156N",
-    "Sin datos: fred:IRLTLT01JPM156N",
-    "Sin datos: fred:T10Y2Y",
-    "Sin datos: fred:T10YIE",
-    "DGS10: FRED no respondió, se usó ^TNX de Yahoo como respaldo",
-    "FRED BAMLC0A0CM: ReadTimeout: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=2",
-    "FRED BAMLH0A0HYM2: ReadTimeout: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=2",
-    "FRED DFII10: omitido: el CSV público de FRED no responde (configura FRED_API_KEY)",
-    "FRED DGS2: omitido: el CSV público de FRED no responde (configura FRED_API_KEY)",
-    "FRED IRLTLT01DEM156N: omitido: el CSV público de FRED no responde (configura FRED_API_KEY)",
-    "FRED IRLTLT01FRM156N: omitido: el CSV público de FRED no responde (configura FRED_API_KEY)",
-    "FRED IRLTLT01JPM156N: omitido: el CSV público de FRED no responde (configura FRED_API_KEY)",
-    "FRED T10Y2Y: omitido: el CSV público de FRED no responde (configura FRED_API_KEY)",
-    "FRED T10YIE: omitido: el CSV público de FRED no responde (configura FRED_API_KEY)",
-    "No se pudo construir: Tesoro EE. UU. 2 años",
-    "No se pudo construir: Curva EE. UU. 10a − 2a",
-    "No se pudo construir: Tasa real EE. UU. 10a (TIPS)",
-    "No se pudo construir: Inflación esperada EE. UU. 10a",
-    "No se pudo construir: Bund Alemania 10a",
-    "No se pudo construir: JGB Japón 10a",
-    "No se pudo construir: Diferencial EE. UU. − Japón 10a",
-    "No se pudo construir: Prima Francia − Alemania 10a",
-    "No se pudo construir: Spread high yield EE. UU.",
-    "No se pudo construir: Spread grado de inversión EE. UU."
-  ]
+  "problemas": []
 }
