@@ -2,9 +2,9 @@ name: Radar semanal
 
 on:
   schedule:
-    # Domingo ~8:15 p. m. hora Colombia (UTC-5) = lunes 01:15 UTC.
-    # GitHub puede demorar la ejecución unos minutos en horas pico.
-    - cron: "15 1 * * 1"
+    # Domingo ~6:15 p. m. hora Colombia (UTC-5) = domingo 23:15 UTC.
+    # Claude lee los resultados a las ~7:50 p. m. y te entrega el análisis.
+    - cron: "15 23 * * 0"
   workflow_dispatch: {}   # botón "Run workflow" para correrlo a mano (también desde el celular)
   push:                   # corre también cuando editas la configuración o el código
     branches: [main]

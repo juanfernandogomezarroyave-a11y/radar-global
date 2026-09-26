@@ -1,11 +1,12 @@
 # Radar Global
 
-Screener cross-asset semanal. Cada domingo por la noche mide ~60 instrumentos (acciones por región,
+Screener cross-asset semanal. Cada domingo a las ~6:15 p. m. (Colombia) mide ~60 instrumentos (acciones por región,
 bonos soberanos, divisas, materias primas, energía, crédito y ratios macro) contra su propia normalidad
 de 3 años, detecta extremos, revisa qué pasó históricamente tras extremos parecidos, cruza con el
 calendario electoral y te entrega:
 
-- **Correo** con las alertas de la semana.
+- **Análisis de Claude** (tarea programada, domingo ~7:50 p. m.): lee los resultados, busca la causa de cada alerta, actualiza las encuestas electorales y te entrega el informe.
+- **Correo** (opcional, si configuras los secrets de Gmail).
 - **Página web** (GitHub Pages) con todo el detalle, tooltips y el archivo de semanas anteriores.
 
 Corre 100% en la nube de GitHub, gratis. No necesitas tener nada encendido.
