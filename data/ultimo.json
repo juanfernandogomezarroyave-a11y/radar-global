@@ -11,21 +11,21 @@
     {
       "id": "HYG",
       "nombre": "Bonos high yield (ETF)",
-      "z": -2.253997081658708,
+      "z": -2.254000238059983,
       "nivel": "aviso",
       "nuevo": true
     },
     {
       "id": "EMB",
       "nombre": "Deuda emergente en dólares",
-      "z": -2.1807703157058653,
+      "z": -2.1807715994256,
       "nivel": "aviso",
       "nuevo": true
     },
     {
       "id": "LQD",
       "nombre": "Corporativos grado de inversión (ETF)",
-      "z": -2.151689767466135,
+      "z": -2.1516891949145194,
       "nivel": "aviso",
       "nuevo": true
     }
