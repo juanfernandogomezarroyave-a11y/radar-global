@@ -80,8 +80,8 @@ bloques:
          que_cuenta: "Brasil: petróleo, minería y bancos. Muy sensible al riesgo fiscal y a las elecciones de oct-2026."}
       - {id: EWW,  nombre: "México", serie: "yf:EWW", tipo: precio,
          que_cuenta: "México: beneficiario del nearshoring, muy ligado a la relación comercial con EE. UU."}
-      - {id: GXG,  nombre: "Colombia", serie: "yf:GXG", tipo: precio,
-         que_cuenta: "Colombia: bancos, petróleo y utilities. Poco líquido; se mueve con el crudo y el riesgo país."}
+      - {id: COL,  nombre: "Colombia (Grupo Cibest / Bancolombia ADR)", serie: "yf:CIB", tipo: precio,
+         que_cuenta: "Proxy de Colombia: el mayor banco del país, listado en NYSE. Refleja crédito local, tasas del Banrep y riesgo país."}
       - {id: ARGT, nombre: "Argentina", serie: "yf:ARGT", tipo: precio,
          que_cuenta: "Argentina: volatilidad extrema ligada a la política económica y a las elecciones de 2027."}
       - {id: EIS,  nombre: "Israel", serie: "yf:EIS", tipo: precio,

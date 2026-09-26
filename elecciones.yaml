@@ -86,6 +86,6 @@ elecciones:
     evento: "Regionales (gobernaciones y alcaldías)"
     fecha: 2027-10-31
     confirmada: false
-    activos: [GXG, USDCOP]
+    activos: [COL, USDCOP]
     contexto: "Fecha tentativa (octubre de 2027). Impacto de mercado menor que una presidencial."
     escenarios: ""

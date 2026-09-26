@@ -35,6 +35,7 @@ Corre 100% en la nube de GitHub, gratis. No necesitas tener nada encendido.
 | `GMAIL_USER` | tu correo de Gmail |
 | `GMAIL_APP_PASSWORD` | la clave de 16 caracteres del paso 2 |
 | `MAIL_TO` | (opcional) destinatario(s), separados por coma. Si no lo pones, llega a `GMAIL_USER` |
+| `FRED_API_KEY` | (muy recomendado) clave gratuita de FRED: <https://fredaccount.stlouisfed.org/apikeys>. Sin ella, las tasas y los spreads de crédito pueden no descargarse desde GitHub |
 
 ### 4. Activar la página web
 **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: `main` / carpeta `/docs`** → Save.

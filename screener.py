@@ -140,29 +140,58 @@ def descargar_yahoo(tickers: list[str], anos: int = 11) -> dict[str, pd.Series]:
     return out
 
 
-def descargar_fred(ids: list[str], anos: int = 11) -> dict[str, pd.Series]:
+def descargar_fred(ids: list[str], anos: int = 11) -> tuple[dict[str, pd.Series], dict[str, str]]:
+    """FRED: API oficial si hay FRED_API_KEY (recomendado); si no, el CSV público.
+    El CSV público a veces no responde desde los servidores de GitHub: se corta rápido
+    para no demorar la corrida y se usan respaldos de Yahoo donde existen."""
     import requests
 
     out: dict[str, pd.Series] = {}
+    errores: dict[str, str] = {}
     inicio = (dt.date.today() - dt.timedelta(days=365 * anos)).isoformat()
+    key = (os.environ.get("FRED_API_KEY") or "").strip()
+    ua = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36"}
+    fallos_seguidos = 0
     for sid in ids:
-        url = f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}&cosd={inicio}"
-        for intento in range(3):
+        if not key and fallos_seguidos >= 2:
+            errores[sid] = "omitido: el CSV público de FRED no responde (configura FRED_API_KEY)"
+            continue
+        for intento in range(2):
             try:
-                r = requests.get(url, timeout=30, headers={"User-Agent": "radar-global/1.0"})
-                r.raise_for_status()
-                df = pd.read_csv(io.StringIO(r.text))
-                col_fecha = df.columns[0]
-                s = pd.to_numeric(df[sid], errors="coerce")
-                s.index = pd.to_datetime(df[col_fecha])
-                s = s.dropna()
+                if key:
+                    r = requests.get("https://api.stlouisfed.org/fred/series/observations",
+                                     params={"series_id": sid, "api_key": key, "file_type": "json",
+                                             "observation_start": inicio}, timeout=(10, 30))
+                    r.raise_for_status()
+                    obs = r.json().get("observations", [])
+                    s = pd.Series({pd.Timestamp(o["date"]): o["value"] for o in obs})
+                    s = pd.to_numeric(s, errors="coerce").dropna()
+                else:
+                    r = requests.get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}&cosd={inicio}",
+                                     timeout=(10, 20), headers=ua)
+                    r.raise_for_status()
+                    df = pd.read_csv(io.StringIO(r.text))
+                    s = pd.to_numeric(df[sid], errors="coerce")
+                    s.index = pd.to_datetime(df[df.columns[0]])
+                    s = s.dropna()
                 if len(s):
-                    out[sid] = s.astype(float)
+                    out[sid] = s.astype(float).sort_index()
+                    errores.pop(sid, None)
+                    fallos_seguidos = 0
+                else:
+                    errores[sid] = "respuesta vacía"
                 break
             except Exception as e:  # noqa: BLE001
-                log(f"FRED {sid} intento {intento + 1} falló: {e}")
-                time.sleep(3)
-    return out
+                errores[sid] = f"{type(e).__name__}: {str(e)[:90]}"
+                log(f"FRED {sid} intento {intento + 1} falló: {errores[sid]}")
+                time.sleep(2)
+        if sid not in out:
+            fallos_seguidos += 1
+    return out, errores
+
+
+# Respaldos en Yahoo para series de FRED clave (tasas del Tesoro en %)
+RESPALDO_YAHOO = {"DGS10": "^TNX", "DGS2": "2YY=F"}
 
 
 def datos_demo(fuentes: list[str], semanas: int = 560, seed: int = 7) -> dict[str, pd.Series]:
@@ -199,8 +228,13 @@ def datos_demo(fuentes: list[str], semanas: int = 560, seed: int = 7) -> dict[st
     return out
 
 
-def cargar_fuentes(instrumentos, demo: bool):
+def ultimo_viernes(hoy: dt.date) -> pd.Timestamp:
+    return pd.Timestamp(hoy - dt.timedelta(days=(hoy.weekday() - 4) % 7))
+
+
+def cargar_fuentes(instrumentos, demo: bool, hoy: dt.date):
     fuentes = sorted({f for ins in instrumentos for f in fuentes_de(ins["serie"])})
+    notas: list[str] = []
     if demo:
         crudo = datos_demo(fuentes)
     else:
@@ -208,19 +242,41 @@ def cargar_fuentes(instrumentos, demo: bool):
         fr_t = [f[5:] for f in fuentes if f.startswith("fred:")]
         log(f"Descargando {len(yf_t)} series de Yahoo y {len(fr_t)} de FRED…")
         y = descargar_yahoo(yf_t)
-        r = descargar_fred(fr_t)
+        r, err = descargar_fred(fr_t)
         crudo = {**{f"yf:{k}": v for k, v in y.items()}, **{f"fred:{k}": v for k, v in r.items()}}
-    ultimo_dato = {k: v.dropna().index.max() for k, v in crudo.items() if len(v.dropna())}
-    semanal = {}
+        # respaldos
+        faltan_resp = {sid: t for sid, t in RESPALDO_YAHOO.items() if sid in fr_t and sid not in r}
+        if faltan_resp:
+            yr = descargar_yahoo(list(faltan_resp.values()))
+            for sid, t in faltan_resp.items():
+                if t in yr:
+                    crudo[f"fred:{sid}"] = yr[t]
+                    err.pop(sid, None)
+                    notas.append(f"{sid}: FRED no respondió, se usó {t} de Yahoo como respaldo")
+        if "T10Y2Y" in fr_t and "T10Y2Y" not in r and "fred:DGS10" in crudo and "fred:DGS2" in crudo:
+            d = pd.concat([crudo["fred:DGS10"], crudo["fred:DGS2"]], axis=1, join="inner").dropna()
+            if len(d):
+                crudo["fred:T10Y2Y"] = d.iloc[:, 0] - d.iloc[:, 1]
+                err.pop("T10Y2Y", None)
+                notas.append("T10Y2Y: calculada como 10 años − 2 años con los respaldos")
+        for sid, e in err.items():
+            notas.append(f"FRED {sid}: {e}")
+    # solo semanas cerradas: nada posterior al último viernes
+    corte = ultimo_viernes(hoy)
+    ultimo_dato, semanal = {}, {}
     for k, s in crudo.items():
         s = s.dropna().sort_index()
         s = s[~s.index.duplicated(keep="last")]
+        s = s[(s.index <= corte) & (s.index.dayofweek < 5)]
+        if not len(s):
+            continue
+        ultimo_dato[k] = s.index.max()
         w = s.resample("W-FRI").last()
         mensual = k.startswith("fred:IRLTLT") or (len(s) > 3 and (s.index.to_series().diff().median() > pd.Timedelta(days=20)))
         w = w.ffill(limit=6 if mensual else 2)
         semanal[k] = w
     faltantes = [f for f in fuentes if f not in semanal]
-    return semanal, ultimo_dato, faltantes
+    return semanal, ultimo_dato, faltantes, notas
 
 
 def construir_serie(serie, semanal):
@@ -768,8 +824,8 @@ def main():
     ahora = dt.datetime.now(TZ)
     hoy = ahora.date()
 
-    semanal, ultimo_dato, faltantes = cargar_fuentes(instrumentos, args.demo)
-    problemas = [f"Sin datos: {f}" for f in faltantes]
+    semanal, ultimo_dato, faltantes, notas = cargar_fuentes(instrumentos, args.demo, hoy)
+    problemas = [f"Sin datos: {f}" for f in faltantes] + notas
     for k, d in ultimo_dato.items():
         diario = not k.startswith("fred:IRLTLT")
         edad = (pd.Timestamp(hoy) - pd.Timestamp(d)).days
