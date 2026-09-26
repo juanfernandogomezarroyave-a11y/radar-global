@@ -190,8 +190,8 @@ def descargar_fred(ids: list[str], anos: int = 11) -> tuple[dict[str, pd.Series]
     return out, errores
 
 
-# Respaldos en Yahoo para series de FRED clave (tasas del Tesoro en %)
-RESPALDO_YAHOO = {"DGS10": "^TNX", "DGS2": "2YY=F"}
+# Respaldo en Yahoo para el 10 años (verificado: ^TNX cuadra con el dato oficial)
+RESPALDO_YAHOO = {"DGS10": "^TNX"}  # 2YY=F se descartó: difiere ~30 pb del 2 años oficial
 
 
 def datos_demo(fuentes: list[str], semanas: int = 560, seed: int = 7) -> dict[str, pd.Series]:
