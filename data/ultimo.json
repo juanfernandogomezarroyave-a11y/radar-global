@@ -1,0 +1,57 @@
+{
+  "corte": "2026-10-02",
+  "alertas": [
+    {
+      "id": "HYG",
+      "nombre": "Bonos high yield (ETF)",
+      "z": -2.2539973090463405,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "EMB",
+      "nombre": "Deuda emergente en dólares",
+      "z": -2.1807736960540978,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "LQD",
+      "nombre": "Corporativos grado de inversión (ETF)",
+      "z": -2.151690074283019,
+      "nivel": "aviso",
+      "nuevo": true
+    }
+  ],
+  "elecciones_en_ventana": [
+    "Brasil 2026-10-04",
+    "Brasil 2026-10-25",
+    "Israel 2026-10-27",
+    "Estados Unidos 2026-11-03"
+  ],
+  "problemas": [
+    "Sin datos: fred:BAMLC0A0CM",
+    "Sin datos: fred:BAMLH0A0HYM2",
+    "Sin datos: fred:DFII10",
+    "Sin datos: fred:DGS10",
+    "Sin datos: fred:DGS2",
+    "Sin datos: fred:IRLTLT01DEM156N",
+    "Sin datos: fred:IRLTLT01FRM156N",
+    "Sin datos: fred:IRLTLT01JPM156N",
+    "Sin datos: fred:T10Y2Y",
+    "Sin datos: fred:T10YIE",
+    "Sin datos: yf:GXG",
+    "No se pudo construir: Colombia",
+    "No se pudo construir: Tesoro EE. UU. 2 años",
+    "No se pudo construir: Tesoro EE. UU. 10 años",
+    "No se pudo construir: Curva EE. UU. 10a − 2a",
+    "No se pudo construir: Tasa real EE. UU. 10a (TIPS)",
+    "No se pudo construir: Inflación esperada EE. UU. 10a",
+    "No se pudo construir: Bund Alemania 10a",
+    "No se pudo construir: JGB Japón 10a",
+    "No se pudo construir: Diferencial EE. UU. − Japón 10a",
+    "No se pudo construir: Prima Francia − Alemania 10a",
+    "No se pudo construir: Spread high yield EE. UU.",
+    "No se pudo construir: Spread grado de inversión EE. UU."
+  ]
+}
