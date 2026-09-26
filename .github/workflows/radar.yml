@@ -6,6 +6,9 @@ on:
     # GitHub puede demorar la ejecución unos minutos en horas pico.
     - cron: "15 1 * * 1"
   workflow_dispatch: {}   # botón "Run workflow" para correrlo a mano (también desde el celular)
+  push:                   # corre también cuando editas la configuración o el código
+    branches: [main]
+    paths: ["config.yaml", "elecciones.yaml", "screener.py", ".github/workflows/radar.yml"]
 
 permissions:
   contents: write
