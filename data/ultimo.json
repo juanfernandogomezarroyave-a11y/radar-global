@@ -25,28 +25,28 @@
     {
       "id": "HYG",
       "nombre": "Bonos high yield (ETF)",
-      "z": -2.2539999066916048,
+      "z": -2.2540001651430424,
       "nivel": "aviso",
       "nuevo": true
     },
     {
       "id": "EMB",
       "nombre": "Deuda emergente en dólares",
-      "z": -2.180771868840266,
+      "z": -2.180771363108997,
       "nivel": "aviso",
       "nuevo": true
     },
     {
       "id": "LQD",
       "nombre": "Corporativos grado de inversión (ETF)",
-      "z": -2.1516891216148197,
+      "z": -2.151690500674028,
       "nivel": "aviso",
       "nuevo": true
     },
     {
       "id": "JP10",
       "nombre": "JGB Japón 10a",
-      "z": 2.384382022255798,
+      "z": 2.384382022255799,
       "nivel": "aviso",
       "nuevo": false
     },
