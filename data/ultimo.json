@@ -1,45 +1,52 @@
 {
-  "corte": "2026-09-25",
+  "corte": "2026-10-02",
   "alertas": [
-    {
-      "id": "US10Y",
-      "nombre": "Tesoro EE. UU. 10 años",
-      "z": 3.2681191537298147,
-      "nivel": "extremo",
-      "nuevo": true
-    },
     {
       "id": "REAL10",
       "nombre": "Tasa real EE. UU. 10a (TIPS)",
-      "z": 3.7270650368399925,
+      "z": 3.73000176423425,
       "nivel": "extremo",
       "nuevo": false
     },
     {
-      "id": "DE10",
-      "nombre": "Bund Alemania 10a",
-      "z": 2.2950163369503884,
-      "nivel": "aviso",
+      "id": "US10Y",
+      "nombre": "Tesoro EE. UU. 10 años",
+      "z": 3.3888233512028587,
+      "nivel": "extremo",
+      "nuevo": false
+    },
+    {
+      "id": "EMB",
+      "nombre": "Deuda emergente en dólares",
+      "z": -2.920143110330134,
+      "nivel": "fuerte",
       "nuevo": true
     },
     {
       "id": "HYG",
       "nombre": "Bonos high yield (ETF)",
-      "z": -2.2540001651430424,
-      "nivel": "aviso",
-      "nuevo": true
-    },
-    {
-      "id": "EMB",
-      "nombre": "Deuda emergente en dólares",
-      "z": -2.180771363108997,
-      "nivel": "aviso",
+      "z": -2.7289131698641307,
+      "nivel": "fuerte",
       "nuevo": true
     },
     {
       "id": "LQD",
       "nombre": "Corporativos grado de inversión (ETF)",
-      "z": -2.151690500674028,
+      "z": -2.5160738291460767,
+      "nivel": "fuerte",
+      "nuevo": true
+    },
+    {
+      "id": "ORO",
+      "nombre": "Oro",
+      "z": -2.33657928822938,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "DE10",
+      "nombre": "Bund Alemania 10a",
+      "z": 2.2950163369503884,
       "nivel": "aviso",
       "nuevo": true
     },
@@ -53,7 +60,7 @@
     {
       "id": "USJP",
       "nombre": "Diferencial EE. UU. − Japón 10a",
-      "z": -2.1843847693519187,
+      "z": -2.184384769351891,
       "nivel": "aviso",
       "nuevo": false
     }
