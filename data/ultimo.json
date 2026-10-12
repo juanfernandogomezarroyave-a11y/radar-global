@@ -1,47 +1,19 @@
 {
-  "corte": "2026-10-02",
+  "corte": "2026-10-09",
   "alertas": [
     {
       "id": "REAL10",
       "nombre": "Tasa real EE. UU. 10a (TIPS)",
-      "z": 3.73000176423425,
+      "z": 3.5201870220014686,
       "nivel": "extremo",
       "nuevo": false
     },
     {
       "id": "US10Y",
       "nombre": "Tesoro EE. UU. 10 años",
-      "z": 3.3888233512028587,
+      "z": 3.192123194581749,
       "nivel": "extremo",
       "nuevo": false
-    },
-    {
-      "id": "EMB",
-      "nombre": "Deuda emergente en dólares",
-      "z": -2.920143110330134,
-      "nivel": "fuerte",
-      "nuevo": true
-    },
-    {
-      "id": "HYG",
-      "nombre": "Bonos high yield (ETF)",
-      "z": -2.7289131698641307,
-      "nivel": "fuerte",
-      "nuevo": true
-    },
-    {
-      "id": "LQD",
-      "nombre": "Corporativos grado de inversión (ETF)",
-      "z": -2.5160738291460767,
-      "nivel": "fuerte",
-      "nuevo": true
-    },
-    {
-      "id": "ORO",
-      "nombre": "Oro",
-      "z": -2.33657928822938,
-      "nivel": "aviso",
-      "nuevo": true
     },
     {
       "id": "DE10",
@@ -51,6 +23,27 @@
       "nuevo": true
     },
     {
+      "id": "EWQ",
+      "nombre": "Francia",
+      "z": -2.1147041365633164,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "HYG",
+      "nombre": "Bonos high yield (ETF)",
+      "z": -2.4495062160828422,
+      "nivel": "aviso",
+      "nuevo": false
+    },
+    {
+      "id": "EMB",
+      "nombre": "Deuda emergente en dólares",
+      "z": -2.4240531855899055,
+      "nivel": "aviso",
+      "nuevo": false
+    },
+    {
       "id": "JP10",
       "nombre": "JGB Japón 10a",
       "z": 2.384382022255799,
@@ -58,9 +51,23 @@
       "nuevo": false
     },
     {
+      "id": "LQD",
+      "nombre": "Corporativos grado de inversión (ETF)",
+      "z": -2.237742155188004,
+      "nivel": "aviso",
+      "nuevo": false
+    },
+    {
       "id": "USJP",
       "nombre": "Diferencial EE. UU. − Japón 10a",
-      "z": -2.184384769351891,
+      "z": -2.1843847693519196,
+      "nivel": "aviso",
+      "nuevo": false
+    },
+    {
+      "id": "ORO",
+      "nombre": "Oro",
+      "z": -2.141713172926337,
       "nivel": "aviso",
       "nuevo": false
     }
