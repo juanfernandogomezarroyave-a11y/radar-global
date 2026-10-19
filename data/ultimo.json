@@ -1,73 +1,66 @@
 {
-  "corte": "2026-10-09",
+  "corte": "2026-10-16",
   "alertas": [
-    {
-      "id": "REAL10",
-      "nombre": "Tasa real EE. UU. 10a (TIPS)",
-      "z": 3.5201870220014686,
-      "nivel": "extremo",
-      "nuevo": false
-    },
-    {
-      "id": "US10Y",
-      "nombre": "Tesoro EE. UU. 10 años",
-      "z": 3.192123194581749,
-      "nivel": "extremo",
-      "nuevo": false
-    },
     {
       "id": "DE10",
       "nombre": "Bund Alemania 10a",
-      "z": 2.2950163369503884,
-      "nivel": "aviso",
+      "z": 3.4625924857771557,
+      "nivel": "extremo",
       "nuevo": true
     },
     {
-      "id": "EWQ",
-      "nombre": "Francia",
-      "z": -2.1147041365633164,
-      "nivel": "aviso",
+      "id": "REAL10",
+      "nombre": "Tasa real EE. UU. 10a (TIPS)",
+      "z": 3.06289466022089,
+      "nivel": "extremo",
+      "nuevo": false
+    },
+    {
+      "id": "FRDE",
+      "nombre": "Prima Francia − Alemania 10a",
+      "z": 2.9234739825109077,
+      "nivel": "fuerte",
       "nuevo": true
     },
     {
       "id": "HYG",
       "nombre": "Bonos high yield (ETF)",
-      "z": -2.4495062160828422,
+      "z": -2.7466540814531513,
+      "nivel": "fuerte",
+      "nuevo": true
+    },
+    {
+      "id": "US10Y",
+      "nombre": "Tesoro EE. UU. 10 años",
+      "z": 2.72983816316162,
+      "nivel": "fuerte",
+      "nuevo": false
+    },
+    {
+      "id": "URA",
+      "nombre": "Uranio y nuclear",
+      "z": -2.2666904618802857,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "JP10",
+      "nombre": "JGB Japón 10a",
+      "z": 2.39326182311627,
       "nivel": "aviso",
       "nuevo": false
     },
     {
       "id": "EMB",
       "nombre": "Deuda emergente en dólares",
-      "z": -2.4240531855899055,
-      "nivel": "aviso",
-      "nuevo": false
-    },
-    {
-      "id": "JP10",
-      "nombre": "JGB Japón 10a",
-      "z": 2.384382022255799,
-      "nivel": "aviso",
-      "nuevo": false
-    },
-    {
-      "id": "LQD",
-      "nombre": "Corporativos grado de inversión (ETF)",
-      "z": -2.237742155188004,
-      "nivel": "aviso",
-      "nuevo": false
-    },
-    {
-      "id": "USJP",
-      "nombre": "Diferencial EE. UU. − Japón 10a",
-      "z": -2.1843847693519196,
+      "z": -2.295427388955018,
       "nivel": "aviso",
       "nuevo": false
     },
     {
       "id": "ORO",
       "nombre": "Oro",
-      "z": -2.141713172926337,
+      "z": -2.1852756073858752,
       "nivel": "aviso",
       "nuevo": false
     }
