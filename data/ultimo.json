@@ -1,5 +1,5 @@
 {
-  "corte": "2026-10-16",
+  "corte": "2026-10-23",
   "alertas": [
     {
       "id": "DE10",
@@ -9,13 +9,6 @@
       "nuevo": true
     },
     {
-      "id": "REAL10",
-      "nombre": "Tasa real EE. UU. 10a (TIPS)",
-      "z": 3.06289466022089,
-      "nivel": "extremo",
-      "nuevo": false
-    },
-    {
       "id": "FRDE",
       "nombre": "Prima Francia − Alemania 10a",
       "z": 2.9234739825109077,
@@ -23,25 +16,39 @@
       "nuevo": true
     },
     {
-      "id": "HYG",
-      "nombre": "Bonos high yield (ETF)",
-      "z": -2.7466540814531513,
+      "id": "ORO",
+      "nombre": "Oro",
+      "z": -2.5930541281736734,
       "nivel": "fuerte",
       "nuevo": true
     },
     {
-      "id": "US10Y",
-      "nombre": "Tesoro EE. UU. 10 años",
-      "z": 2.72983816316162,
+      "id": "HYG",
+      "nombre": "Bonos high yield (ETF)",
+      "z": -2.570614669983817,
       "nivel": "fuerte",
       "nuevo": false
     },
     {
-      "id": "URA",
-      "nombre": "Uranio y nuclear",
-      "z": -2.2666904618802857,
+      "id": "PLATA",
+      "nombre": "Plata",
+      "z": -2.227224311894395,
       "nivel": "aviso",
       "nuevo": true
+    },
+    {
+      "id": "EWQ",
+      "nombre": "Francia",
+      "z": -2.15689290024176,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "REAL10",
+      "nombre": "Tasa real EE. UU. 10a (TIPS)",
+      "z": 2.4721643968072162,
+      "nivel": "aviso",
+      "nuevo": false
     },
     {
       "id": "JP10",
@@ -51,22 +58,28 @@
       "nuevo": false
     },
     {
-      "id": "EMB",
-      "nombre": "Deuda emergente en dólares",
-      "z": -2.295427388955018,
+      "id": "URA",
+      "nombre": "Uranio y nuclear",
+      "z": -2.367818998857729,
       "nivel": "aviso",
       "nuevo": false
     },
     {
-      "id": "ORO",
-      "nombre": "Oro",
-      "z": -2.1852756073858752,
+      "id": "EMB",
+      "nombre": "Deuda emergente en dólares",
+      "z": -2.2505605798531456,
+      "nivel": "aviso",
+      "nuevo": false
+    },
+    {
+      "id": "US10Y",
+      "nombre": "Tesoro EE. UU. 10 años",
+      "z": 2.2228083899737734,
       "nivel": "aviso",
       "nuevo": false
     }
   ],
   "elecciones_en_ventana": [
-    "Brasil 2026-10-04",
     "Brasil 2026-10-25",
     "Israel 2026-10-27",
     "Estados Unidos 2026-11-03"
