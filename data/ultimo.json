@@ -1,54 +1,54 @@
 {
-  "corte": "2026-10-23",
+  "corte": "2026-10-30",
   "alertas": [
     {
       "id": "DE10",
       "nombre": "Bund Alemania 10a",
-      "z": 3.4625924857771557,
+      "z": 3.462592485777157,
       "nivel": "extremo",
       "nuevo": true
     },
     {
       "id": "FRDE",
       "nombre": "Prima Francia − Alemania 10a",
-      "z": 2.9234739825109077,
+      "z": 2.923473982510925,
+      "nivel": "fuerte",
+      "nuevo": true
+    },
+    {
+      "id": "EIS",
+      "nombre": "Israel",
+      "z": -2.577220559301224,
+      "nivel": "fuerte",
+      "nuevo": true
+    },
+    {
+      "id": "PLATA",
+      "nombre": "Plata",
+      "z": -2.57115487946731,
       "nivel": "fuerte",
       "nuevo": true
     },
     {
       "id": "ORO",
       "nombre": "Oro",
-      "z": -2.5930541281736734,
-      "nivel": "fuerte",
-      "nuevo": true
-    },
-    {
-      "id": "HYG",
-      "nombre": "Bonos high yield (ETF)",
-      "z": -2.570614669983817,
+      "z": -2.770310757957483,
       "nivel": "fuerte",
       "nuevo": false
     },
     {
-      "id": "PLATA",
-      "nombre": "Plata",
-      "z": -2.227224311894395,
+      "id": "ARGT",
+      "nombre": "Argentina",
+      "z": -2.3008979227083333,
       "nivel": "aviso",
       "nuevo": true
     },
     {
-      "id": "EWQ",
-      "nombre": "Francia",
-      "z": -2.15689290024176,
+      "id": "EEM",
+      "nombre": "Emergentes (amplio)",
+      "z": -2.1059742846967944,
       "nivel": "aviso",
       "nuevo": true
-    },
-    {
-      "id": "REAL10",
-      "nombre": "Tasa real EE. UU. 10a (TIPS)",
-      "z": 2.4721643968072162,
-      "nivel": "aviso",
-      "nuevo": false
     },
     {
       "id": "JP10",
@@ -58,23 +58,37 @@
       "nuevo": false
     },
     {
-      "id": "URA",
-      "nombre": "Uranio y nuclear",
-      "z": -2.367818998857729,
+      "id": "REAL10",
+      "nombre": "Tasa real EE. UU. 10a (TIPS)",
+      "z": 2.375367808061526,
       "nivel": "aviso",
       "nuevo": false
     },
     {
-      "id": "EMB",
-      "nombre": "Deuda emergente en dólares",
-      "z": -2.2505605798531456,
+      "id": "URA",
+      "nombre": "Uranio y nuclear",
+      "z": -2.303423867922206,
       "nivel": "aviso",
       "nuevo": false
     },
     {
       "id": "US10Y",
       "nombre": "Tesoro EE. UU. 10 años",
-      "z": 2.2228083899737734,
+      "z": 2.245820958711495,
+      "nivel": "aviso",
+      "nuevo": false
+    },
+    {
+      "id": "HYG",
+      "nombre": "Bonos high yield (ETF)",
+      "z": -2.206070984233183,
+      "nivel": "aviso",
+      "nuevo": false
+    },
+    {
+      "id": "EMB",
+      "nombre": "Deuda emergente en dólares",
+      "z": -2.0216104616860004,
       "nivel": "aviso",
       "nuevo": false
     }
