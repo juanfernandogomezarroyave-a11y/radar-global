@@ -1,10 +1,17 @@
 {
-  "corte": "2026-10-30",
+  "corte": "2026-11-06",
   "alertas": [
     {
       "id": "DE10",
       "nombre": "Bund Alemania 10a",
       "z": 3.462592485777157,
+      "nivel": "extremo",
+      "nuevo": true
+    },
+    {
+      "id": "EIS",
+      "nombre": "Israel",
+      "z": -3.0240481869453073,
       "nivel": "extremo",
       "nuevo": true
     },
@@ -16,39 +23,53 @@
       "nuevo": true
     },
     {
-      "id": "EIS",
-      "nombre": "Israel",
-      "z": -2.577220559301224,
-      "nivel": "fuerte",
-      "nuevo": true
-    },
-    {
-      "id": "PLATA",
-      "nombre": "Plata",
-      "z": -2.57115487946731,
-      "nivel": "fuerte",
-      "nuevo": true
-    },
-    {
-      "id": "ORO",
-      "nombre": "Oro",
-      "z": -2.770310757957483,
-      "nivel": "fuerte",
-      "nuevo": false
-    },
-    {
       "id": "ARGT",
       "nombre": "Argentina",
-      "z": -2.3008979227083333,
-      "nivel": "aviso",
+      "z": -2.866262264353797,
+      "nivel": "fuerte",
+      "nuevo": true
+    },
+    {
+      "id": "USDILS",
+      "nombre": "Dólar / shekel",
+      "z": 2.617898374292598,
+      "nivel": "fuerte",
       "nuevo": true
     },
     {
       "id": "EEM",
       "nombre": "Emergentes (amplio)",
-      "z": -2.1059742846967944,
+      "z": -2.58305720547881,
+      "nivel": "fuerte",
+      "nuevo": true
+    },
+    {
+      "id": "EWJ",
+      "nombre": "Japón",
+      "z": -2.216521900281565,
       "nivel": "aviso",
       "nuevo": true
+    },
+    {
+      "id": "QQQ",
+      "nombre": "Nasdaq 100",
+      "z": -2.205995675243761,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "DBA",
+      "nombre": "Agrícola amplio (ETF)",
+      "z": -2.0863255726160244,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "URA",
+      "nombre": "Uranio y nuclear",
+      "z": -2.4110896427519846,
+      "nivel": "aviso",
+      "nuevo": false
     },
     {
       "id": "JP10",
@@ -58,37 +79,37 @@
       "nuevo": false
     },
     {
-      "id": "REAL10",
-      "nombre": "Tasa real EE. UU. 10a (TIPS)",
-      "z": 2.375367808061526,
-      "nivel": "aviso",
-      "nuevo": false
-    },
-    {
-      "id": "URA",
-      "nombre": "Uranio y nuclear",
-      "z": -2.303423867922206,
-      "nivel": "aviso",
-      "nuevo": false
-    },
-    {
-      "id": "US10Y",
-      "nombre": "Tesoro EE. UU. 10 años",
-      "z": 2.245820958711495,
-      "nivel": "aviso",
-      "nuevo": false
-    },
-    {
       "id": "HYG",
       "nombre": "Bonos high yield (ETF)",
-      "z": -2.206070984233183,
+      "z": -2.311663176211588,
+      "nivel": "aviso",
+      "nuevo": false
+    },
+    {
+      "id": "REAL10",
+      "nombre": "Tasa real EE. UU. 10a (TIPS)",
+      "z": 2.2258374186800784,
+      "nivel": "aviso",
+      "nuevo": false
+    },
+    {
+      "id": "ORO",
+      "nombre": "Oro",
+      "z": -2.1855601659001067,
+      "nivel": "aviso",
+      "nuevo": false
+    },
+    {
+      "id": "PLATA",
+      "nombre": "Plata",
+      "z": -2.178451082736253,
       "nivel": "aviso",
       "nuevo": false
     },
     {
       "id": "EMB",
       "nombre": "Deuda emergente en dólares",
-      "z": -2.0216104616860004,
+      "z": -2.0428145773141297,
       "nivel": "aviso",
       "nuevo": false
     }
