@@ -1,107 +1,196 @@
 {
-  "corte": "2026-11-13",
+  "corte": "2026-11-20",
   "alertas": [
     {
-      "id": "DE10",
-      "nombre": "Bund Alemania 10a",
-      "z": 3.462592485777157,
+      "id": "FRDE",
+      "nombre": "Prima Francia − Alemania 10a",
+      "z": 5.8882702178550055,
+      "nivel": "extremo",
+      "nuevo": true
+    },
+    {
+      "id": "EIS",
+      "nombre": "Israel",
+      "z": -4.040296109034458,
+      "nivel": "extremo",
+      "nuevo": true
+    },
+    {
+      "id": "EEM",
+      "nombre": "Emergentes (amplio)",
+      "z": -3.9978143591100688,
+      "nivel": "extremo",
+      "nuevo": true
+    },
+    {
+      "id": "VIX",
+      "nombre": "VIX (volatilidad acciones)",
+      "z": 3.7703159540269024,
+      "nivel": "extremo",
+      "nuevo": true
+    },
+    {
+      "id": "ARGT",
+      "nombre": "Argentina",
+      "z": -3.701475136568215,
+      "nivel": "extremo",
+      "nuevo": true
+    },
+    {
+      "id": "ORO",
+      "nombre": "Oro",
+      "z": -3.4669851324393295,
+      "nivel": "extremo",
+      "nuevo": true
+    },
+    {
+      "id": "QQQ",
+      "nombre": "Nasdaq 100",
+      "z": -3.443278780007874,
+      "nivel": "extremo",
+      "nuevo": true
+    },
+    {
+      "id": "USDILS",
+      "nombre": "Dólar / shekel",
+      "z": 3.2950884558532376,
+      "nivel": "extremo",
+      "nuevo": true
+    },
+    {
+      "id": "EWJ",
+      "nombre": "Japón",
+      "z": -3.2206145522716048,
+      "nivel": "extremo",
+      "nuevo": true
+    },
+    {
+      "id": "PLATA",
+      "nombre": "Plata",
+      "z": -3.146737870135973,
+      "nivel": "extremo",
+      "nuevo": true
+    },
+    {
+      "id": "URA",
+      "nombre": "Uranio y nuclear",
+      "z": -3.136546140639298,
       "nivel": "extremo",
       "nuevo": true
     },
     {
       "id": "REAL10",
       "nombre": "Tasa real EE. UU. 10a (TIPS)",
-      "z": 3.1117506067568295,
+      "z": 3.0639751479557686,
       "nivel": "extremo",
-      "nuevo": true
+      "nuevo": false
     },
     {
-      "id": "FRDE",
-      "nombre": "Prima Francia − Alemania 10a",
-      "z": 2.923473982510925,
+      "id": "SPY",
+      "nombre": "S&P 500 (EE. UU.)",
+      "z": -2.9376779701078264,
       "nivel": "fuerte",
       "nuevo": true
     },
     {
-      "id": "ORO",
-      "nombre": "Oro",
-      "z": -2.5943203906103762,
+      "id": "COBRE",
+      "nombre": "Cobre",
+      "z": -2.7058694945771866,
       "nivel": "fuerte",
+      "nuevo": true
+    },
+    {
+      "id": "EWZ",
+      "nombre": "Brasil",
+      "z": -2.678099509890054,
+      "nivel": "fuerte",
+      "nuevo": true
+    },
+    {
+      "id": "EMB",
+      "nombre": "Deuda emergente en dólares",
+      "z": -2.673470730585949,
+      "nivel": "fuerte",
+      "nuevo": true
+    },
+    {
+      "id": "USDBRL",
+      "nombre": "Dólar / real brasileño",
+      "z": 2.651417645246407,
+      "nivel": "fuerte",
+      "nuevo": true
+    },
+    {
+      "id": "VGK",
+      "nombre": "Europa",
+      "z": -2.597839784481855,
+      "nivel": "fuerte",
+      "nuevo": true
+    },
+    {
+      "id": "HYG",
+      "nombre": "Bonos high yield (ETF)",
+      "z": -2.579159050900941,
+      "nivel": "fuerte",
+      "nuevo": true
+    },
+    {
+      "id": "DE10",
+      "nombre": "Bund Alemania 10a",
+      "z": 2.7875614356827945,
+      "nivel": "fuerte",
+      "nuevo": false
+    },
+    {
+      "id": "ICLN",
+      "nombre": "Energías renovables",
+      "z": -2.30771234871955,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "EMLC",
+      "nombre": "Deuda emergente en moneda local",
+      "z": -2.2715457425322776,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "EWQ",
+      "nombre": "Francia",
+      "z": -2.2211227526373696,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "IWM",
+      "nombre": "Russell 2000 (small caps)",
+      "z": -2.1978478653954094,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "AUDUSD",
+      "nombre": "Dólar australiano / dólar",
+      "z": -2.1930942976066894,
+      "nivel": "aviso",
+      "nuevo": true
+    },
+    {
+      "id": "DBA",
+      "nombre": "Agrícola amplio (ETF)",
+      "z": -2.0112286797306123,
+      "nivel": "aviso",
       "nuevo": true
     },
     {
       "id": "US10Y",
       "nombre": "Tesoro EE. UU. 10 años",
-      "z": 2.569777736846262,
-      "nivel": "fuerte",
-      "nuevo": true
-    },
-    {
-      "id": "EIS",
-      "nombre": "Israel",
-      "z": -2.830541524208863,
-      "nivel": "fuerte",
-      "nuevo": false
-    },
-    {
-      "id": "ARGT",
-      "nombre": "Argentina",
-      "z": -2.730492589199372,
-      "nivel": "fuerte",
-      "nuevo": false
-    },
-    {
-      "id": "EMB",
-      "nombre": "Deuda emergente en dólares",
-      "z": -2.2031237742102032,
-      "nivel": "aviso",
-      "nuevo": true
-    },
-    {
-      "id": "USDILS",
-      "nombre": "Dólar / shekel",
-      "z": 2.46253083670903,
-      "nivel": "aviso",
-      "nuevo": false
-    },
-    {
-      "id": "JP10",
-      "nombre": "JGB Japón 10a",
-      "z": 2.39326182311627,
-      "nivel": "aviso",
-      "nuevo": false
-    },
-    {
-      "id": "URA",
-      "nombre": "Uranio y nuclear",
-      "z": -2.3762967081064708,
-      "nivel": "aviso",
-      "nuevo": false
-    },
-    {
-      "id": "PLATA",
-      "nombre": "Plata",
-      "z": -2.3728125004841747,
-      "nivel": "aviso",
-      "nuevo": false
-    },
-    {
-      "id": "HYG",
-      "nombre": "Bonos high yield (ETF)",
-      "z": -2.1878240830670657,
-      "nivel": "aviso",
-      "nuevo": false
-    },
-    {
-      "id": "EEM",
-      "nombre": "Emergentes (amplio)",
-      "z": -2.0886899910252494,
+      "z": 2.30866978689857,
       "nivel": "aviso",
       "nuevo": false
     }
   ],
-  "elecciones_en_ventana": [
-    "Estados Unidos 2026-11-03"
-  ],
+  "elecciones_en_ventana": [],
   "problemas": []
 }
